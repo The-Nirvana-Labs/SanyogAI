@@ -1,0 +1,25 @@
+{
+  "work_experience": [
+    {
+        "title": "",
+        "company": {
+            "name": "",
+            "location": "",
+            "website": "",
+            "description": ""
+        },
+        "start_date": "",
+        "end_date": "",
+        "responsibilities": [
+            {
+                "situation": "",
+                "task": "",
+                "action": "",
+                "result": ""
+            }
+        ],
+        "skills_used": [],
+        "achievements": []
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+   "education":[
+      {
+         "degree":"",
+         "major":"",
+         "university":"",
+         "start_date":"",
+         "end_date":"",
+         "gpa":"",
+         "courses":[],
+         "honors":[]
+      }
+   ]
+}

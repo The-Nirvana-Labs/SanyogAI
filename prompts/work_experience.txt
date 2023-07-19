@@ -1,0 +1,30 @@
+Task: Extract Educational Information and Create JSON
+
+1. **Goal**: Extract educational information from the given resume and create a JSON file containing specific parameters. Additionally, fix any naive errors and abbreviations.
+
+2. **Parameters for JSON**:
+```json
+"education": [
+   {
+      "degree": "",
+      "major": "",
+      "university": "",
+      "start_date": "",
+      "end_date": "",
+      "gpa": "",
+      "courses": [],
+      "honors": []
+   }
+]
+```
+
+3. **Process**:
+   - Extract educational information from the resume.
+   - Clean and normalize the extracted data, fixing any errors or abbreviations.
+   - Create a JSON object using the specified parameters.
+   - Store the JSON object in a file.
+   - Suggest additional quantitative fields or parameters for resume comparisons.
+
+4. **Input**: The resume document.
+
+5. **Output**: A JSON file containing the extracted educational information and suggested quantitative fields for comparison.
