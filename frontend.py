@@ -13,7 +13,7 @@ pc = PineconeUtils(config('PINECONE_KEY'), "us-west4-gcp")
 llm = Prompts(config('OPENAI_KEY'))
 
 # Create the Streamlit app and set the title
-st.title("Resume Analysis")
+st.title("Talent Flow")
 
 # Create tabs for upload and find functionalities
 upload, find = st.tabs(["Upload ☁️", "Find 🔎"])
