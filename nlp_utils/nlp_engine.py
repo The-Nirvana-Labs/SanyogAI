@@ -31,6 +31,8 @@ class Preprocessor:
         stemmer = PorterStemmer()
         stopwords_english = set(stopwords.words('english'))
 
+
+        resume_text = str(resume_text)
         # Convert the entire resume text to lowercase
         resume_text = resume_text.lower()
 

@@ -39,7 +39,7 @@ class Prompts:
             str: The security audit prompt.
         """
         prompt = (
-            "Analyze the resume above and infer the following information about the candidate:"
+            "Analyze the resume above for context and answer the following information about the candidate, give output in list of keywords "
             """
             {
             "work_experience":"",
@@ -61,8 +61,17 @@ class Prompts:
             str: The security audit prompt.
         """
         prompt = (
-            "Examine the provided job description and create a comprehensive profile of an ideal candidate suited for this position in short paragraph"
-            
+            "Examine the above job description and create a list of keywords that describe the skills, qualities and background of the perfect candidate"
+            "Give the output in JSON as follows:"
+             """
+            {
+            "work_experience":"",
+            "education":"",
+            "projects":"",
+            "hard_skills":"",
+            "inferred_soft_skills":""
+            }
+            """
         )
         return prompt
 
