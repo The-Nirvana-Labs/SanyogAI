@@ -25,42 +25,43 @@ with upload:
     
     # Check if the "Upload" button is clicked
     if st.button("Upload"):
-        # Loop through the uploaded resume files
-        for uploaded_file in uploaded_files:
-            # Create the file path
-            file_path = os.path.join("resume_dir", str(uploaded_file.id))
+        with st.spinner():
+            # Loop through the uploaded resume files
+            for uploaded_file in uploaded_files:
+                # Create the file path
+                file_path = os.path.join("resume_dir", str(uploaded_file.id))
 
-            # Save the file in the folder
-            with open(file_path, "wb") as file:
-                file.write(uploaded_file.getbuffer())
+                # Save the file in the folder
+                with open(file_path, "wb") as file:
+                    file.write(uploaded_file.getbuffer())
 
-            # Extract text from the resume PDF
-            resume_text = Preprocessor.extract_text_from_pdf(file_path)
+                # Extract text from the resume PDF
+                resume_text = Preprocessor.extract_text_from_pdf(file_path)
 
-            # Get the prompt for resume screening from OpenAI
-            prompt = llm.resume_screening
+                # Get the prompt for resume screening from OpenAI
+                prompt = llm.resume_screening
 
-            # Perform GPT-3 completion on the resume text concatenated with the prompt
-            resume_screened = llm.gpt3_completion(resume_text + "\n" + prompt)
+                # Perform GPT-3 completion on the resume text concatenated with the prompt
+                resume_screened = llm.gpt3_completion(resume_text + "\n" + prompt)
 
-            # Convert the GPT-3 response to a dictionary
-            try:
-                resume_dict = json.loads(resume_screened)
+                # Convert the GPT-3 response to a dictionary
+                try:
+                    resume_dict = json.loads(resume_screened)
 
-                # Prepare embeddings and Pinecone vector objects for each resume section
-                vec_obj_lst = []
-                for resume_sec in resume_dict.values():
-                    resume_clean_lst = Preprocessor.preprocess_resume(resume_sec)
-                    resume_clean = ' '.join(resume_clean_lst)
-                    embedding = mpnet_embeddings(resume_clean)
-                    vec_obj = pc.create_vector_object(str(uuid.uuid4()), embedding, metadata={"file_id": uploaded_file.id})
-                    vec_obj_lst.append(vec_obj)
+                    # Prepare embeddings and Pinecone vector objects for each resume section
+                    vec_obj_lst = []
+                    for resume_sec in resume_dict.values():
+                        resume_clean_lst = Preprocessor.preprocess_resume(resume_sec)
+                        resume_clean = ' '.join(resume_clean_lst)
+                        embedding = mpnet_embeddings(resume_clean)
+                        vec_obj = pc.create_vector_object(str(uuid.uuid4()), embedding, metadata={"file_id": uploaded_file.id})
+                        vec_obj_lst.append(vec_obj)
 
-                # Upsert the vector objects to the Pinecone index
-                vec_upsert = pc.upsert_vectors(vec_obj_lst, "ats-gpt")
-                print(vec_upsert)
-            except:
-                pass
+                    # Upsert the vector objects to the Pinecone index
+                    vec_upsert = pc.upsert_vectors(vec_obj_lst, "ats-gpt")
+                    print(vec_upsert)
+                except:
+                    pass
 
 # find tab
 with find:
